@@ -17,6 +17,7 @@ Score <input id="tfscore" style="width:100px;text-align:center" type="text" read
 <input id="replayBtn" value="Replay" style="width:60px;text-align:center" type="button"/>
 </p>
 <script type="text/javascript">
+var mouseX=0,mouseY=0;
 var columnCount=17;
 var leading=3;
 var rowCount=20+leading;
@@ -1046,6 +1047,20 @@ function fReplay(event){
 	event=event||window.event;
 	exitGame();
 	initGame();
+}
+function updateMouseXY(event){
+	if(event && event.targetTouches && event.targetTouches.length>0){
+		updateMouseXY(event.targetTouches[0]);
+		return;
+	}
+	event=event||window.event;
+	if(event.pageX || event.pageY){ 
+		mouseX=event.pageX;
+		mouseY=event.pageY;
+		return;
+	}
+	mouseX=event.clientX + document.body.scrollLeft - document.body.clientLeft;
+	mouseY=event.clientY + document.body.scrollTop - document.body.clientTop;	 
 }
 </script>
 </body>
